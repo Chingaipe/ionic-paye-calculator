@@ -1,27 +1,64 @@
-#container {
-  text-align: center;
-
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+#take-home ion-card-title {
+  font-size: 7vw;
+  font-weight: 600;
+  color: var(--ion-color-secondary);
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+#take-home ion-card-subtitle {
+  font-weight: 600;
+  color: var(--ion-color-secondary);
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
+#take-home ion-thumbnail {
+  height: 24px;
+  width: auto;
+  margin-right: 5px;
 }
 
-#container a {
-  text-decoration: none;
+form ion-label {
+  font-weight: 600;
+  color: var(--ion-color-secondary-shade);
+}
+
+#info-grid ion-label {
+  font-size: 14px;
+  color: var(--ion-color-secondary);
+}
+
+#info-grid h4 {
+  margin-top: 10px;
+  font-weight: 500;
+}
+
+#info-grid ion-icon {
+  font-size: 18px;
+}
+
+#info-grid ion-thumbnail {
+  width: 18px;
+  height: auto;
+  margin-right: 10px;
+}
+
+#table > ion-grid {
+  --ion-grid-column-padding: 10px;
+  border-collapse: collapse;
+  border-style: hidden;
+  
+  ion-row:first-child {
+    background-color:  var(--ion-color-primary);
+    font-weight: bold;
+  }
+  ion-col {
+    border: 1px solid black;
+    border-bottom: 0;
+    border-right: 0;
+  }
+  ion-col:last-child {
+    border-right: 1px solid black;
+  }
+  
+  ion-row:last-child {
+    border-bottom: 1px solid black;
+  }
 }

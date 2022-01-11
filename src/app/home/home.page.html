@@ -1,7 +1,12 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons slot="primary">
+      <ion-button (click)="toggleTheme($event)">
+        <ion-icon slot="icon-only" ios="sunny" md="sunny"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-title>
-      Blank
+      Zambia PAYE Calculator
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,12 +14,125 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+      <ion-title size="large">PAYE Calculator</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <div class="ion-padding">
+    <form [formGroup]="taxForm" (ngSubmit)="onSubmit()">
+      <ion-item>
+        <ion-label position="floating">Basic Salary <ion-text color="danger">*</ion-text></ion-label>
+        <ion-input required formControlName="basic" type="number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Allowances</ion-label>
+        <ion-input outlined formControlName="allowances" type="number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Statutory Deductions</ion-label>
+        <ion-input outlined formControlName="otherDeducs" type="number"></ion-input>
+      </ion-item>
+      <ion-button expand="block" class="ion-margin-vertical" color="secondary" fill="outline" type="submit" [disabled]="taxForm.invalid">
+        Calculate
+      </ion-button>
+    </form>
+
+    <ion-card id="take-home" class="ion-margin-vertical">
+      <ion-card-header>
+        <ion-card-subtitle>
+          Take Home Amount
+        </ion-card-subtitle>
+        <ion-card-title>{{ currency(info.takeHome) }}</ion-card-title>
+      </ion-card-header>
+    </ion-card>
+
+    <ion-grid id="info-grid" class="ion-marign-vertical">
+      <ion-row>
+        <ion-col size="6">
+          <ion-label class="info-label">
+            <!-- <ion-icon slot="start" name="cash-outline"></ion-icon> -->
+            NAPSA at 5%
+          </ion-label>
+          <ion-text>
+            <h4>{{ currency(info.napsa) }}</h4>
+          </ion-text>
+        </ion-col>
+        <ion-col size="6">
+          <ion-label class="info-label">
+            <!-- <ion-icon name="pulse"></ion-icon> -->
+            NHIMA at 1%
+          </ion-label>
+          <ion-text>
+            <h4>{{ currency(info.nhima) }}</h4>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="6">
+          <ion-label class="info-label">Exempt</ion-label>
+          <ion-text>
+            <h4>{{ currency(info.exempt) }}</h4>
+          </ion-text>
+        </ion-col>
+        <ion-col size="6">
+          <ion-label class="info-label">Tax Deductions</ion-label>
+          <ion-text>
+            <h4>{{ currency(info.taxDeduc) }}</h4>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="6">
+          <ion-label class="info-label">Total Contributions</ion-label>
+          <ion-text>
+            <h4>{{ currency(info.contributions) }}</h4>
+          </ion-text>
+        </ion-col>
+        <ion-col size="6">
+          <ion-label class="info-label">Total Deductions</ion-label>
+          <ion-text>
+            <h4>{{ currency(info.totalDeduc) }}</h4>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-item>
+      <ion-button (click)="isOpen = !isOpen" slot="end" color="secondary" fill="outline">More Details</ion-button>
+    </ion-item>
+    <ion-modal
+      [isOpen]="isOpen"
+      [breakpoints]="[0.1, 0.5, 1]"
+      [initialBreakpoint]="0.5"
+    >
+      <ng-template>
+        <ion-header class="ion-no-border">
+          <ion-toolbar>
+            <ion-title>Details</ion-title>
+            <ion-button (click)="isOpen = !isOpen" color="dark" slot="end" fill="clear">
+              Close
+            </ion-button>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content id="table" class="ion-padding">
+          <ion-grid class="ion-margin">
+            <ion-row>
+              <ion-col>Band</ion-col>
+              <ion-col>Rate</ion-col>
+              <ion-col>Income</ion-col>
+              <ion-col>Tax Due</ion-col>
+            </ion-row>
+            <ion-row *ngFor="let t of taxInfo">
+              <ion-col>{{ t.band }}</ion-col>
+              <ion-col>{{ t.percentage }}</ion-col>
+              <ion-col>{{ t.amount }}</ion-col>
+              <ion-col>{{ t.dues }}</ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-content>
+      </ng-template>
+    </ion-modal>
   </div>
 </ion-content>
