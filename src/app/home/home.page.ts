@@ -36,6 +36,7 @@ export class HomePage {
     taxDeduc: 0,
     takeHome: 0,
   };
+  grossPay = 0;
   taxBandDues: number[] = [];
   taxInfo: TaxInfo[] = [];
 
@@ -56,32 +57,52 @@ export class HomePage {
   }
 
   onSubmit() {
-    const remuneration = this.getRemuneration();
+    this.reset();
 
-    this.info.napsa = this.calcNapsa(remuneration);
+    this.grossPay = this.getRemuneration();
+
+    this.info.napsa = this.calcNapsa(this.grossPay);
     this.info.nhima = this.calculateNhima(this.taxForm.value.basic);
     this.info.contributions = this.getTotalContributions();
 
-    if (this.isTaxable(remuneration)) {
+    if (this.isTaxable(this.grossPay)) {
       // for those above the band 0
-      const taxable = this.getTaxableIncome(remuneration);
+      const taxable = this.getTaxableIncome(this.grossPay);
       const taxDues = this.calculateTaxes(taxable);
 
       this.info.taxDeduc = taxDues;
       this.info.totalDeduc = taxDues + this.info.contributions;
-      this.info.takeHome = remuneration - this.info.totalDeduc;
+      this.info.takeHome = this.grossPay - this.info.totalDeduc;
     } else {
       // for those below band 0
-      this.info.takeHome = remuneration - this.info.contributions;
+      this.info.totalDeduc = this.info.contributions;
+      this.info.takeHome = this.grossPay - this.info.contributions;
     }
 
     this.setTaxInfo();
-    console.log(JSON.stringify(this.info));
+    /* console.log(JSON.stringify(this.info));
     console.log(JSON.stringify(this.taxBandDues));
-    console.log(JSON.stringify(this.taxForm.value));
+    console.log(JSON.stringify(this.taxForm.value)); */
   }
 
-  setTaxInfo() {
+  reset() {
+    this.taxBandDues = [];
+    this.taxInfo = []; // clear the array in case of recalculation
+    this.info = {
+      napsa: 0,
+      nhima: 0,
+      exempt: 4500,
+      totalDeduc: 0,
+      contributions: 0,
+      taxDeduc: 0,
+      takeHome: 0,
+    };
+  }
+
+  /**
+   * Sets the tax info data on tax calculation
+   */
+  setTaxInfo(): void {
     const band0: TaxInfo = {
       band: '1',
       percentage: '0%',
@@ -118,6 +139,11 @@ export class HomePage {
     return input.basic + input.allowances;
   }
 
+  /**
+   * gets the taxable income
+   * @param salary total remuneration
+   * @returns income minus exempt amount
+   */
   getTaxableIncome(salary: number): number {
     return salary - this.info.exempt;
   }

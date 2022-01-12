@@ -1,5 +1,5 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-buttons slot="primary">
       <ion-button (click)="toggleTheme($event)">
         <ion-icon slot="icon-only" ios="sunny" md="sunny"></ion-icon>
@@ -32,16 +32,23 @@
         <ion-label position="floating">Statutory Deductions</ion-label>
         <ion-input outlined formControlName="otherDeducs" type="number"></ion-input>
       </ion-item>
-      <ion-button expand="block" class="ion-margin-vertical" color="secondary" fill="outline" type="submit" [disabled]="taxForm.invalid">
-        Calculate
-      </ion-button>
+      <ion-row class="ion-justify-content-center">
+        <ion-button class="ion-margin-vertical" color="secondary" fill="outline"
+          type="submit" [disabled]="taxForm.invalid"
+        >
+          Calculate
+        </ion-button>
+        <ion-button class="ion-margin" color="danger" fill="outline"
+          type="buttom" (click)="reset()"
+        >
+          Clear
+        </ion-button>
+      </ion-row>
     </form>
 
     <ion-card id="take-home" class="ion-margin-vertical">
       <ion-card-header>
-        <ion-card-subtitle>
-          Take Home Amount
-        </ion-card-subtitle>
+        <ion-card-subtitle>Take Home Amount</ion-card-subtitle>
         <ion-card-title>{{ currency(info.takeHome) }}</ion-card-title>
       </ion-card-header>
     </ion-card>
@@ -70,9 +77,9 @@
 
       <ion-row>
         <ion-col size="6">
-          <ion-label class="info-label">Exempt</ion-label>
+          <ion-label class="info-label">Gross Pay</ion-label>
           <ion-text>
-            <h4>{{ currency(info.exempt) }}</h4>
+            <h4>{{ currency(grossPay) }}</h4>
           </ion-text>
         </ion-col>
         <ion-col size="6">
@@ -99,7 +106,7 @@
       </ion-row>
     </ion-grid>
 
-    <ion-item>
+    <ion-item lines="none">
       <ion-button (click)="isOpen = !isOpen" slot="end" color="secondary" fill="outline">More Details</ion-button>
     </ion-item>
     <ion-modal
@@ -110,14 +117,14 @@
       <ng-template>
         <ion-header class="ion-no-border">
           <ion-toolbar>
-            <ion-title>Details</ion-title>
-            <ion-button (click)="isOpen = !isOpen" color="dark" slot="end" fill="clear">
+            <ion-title>Tax Band Details</ion-title>
+            <ion-button (click)="isOpen = !isOpen" color="danger" slot="end" fill="clear">
               Close
             </ion-button>
           </ion-toolbar>
         </ion-header>
         <ion-content id="table" class="ion-padding">
-          <ion-grid class="ion-margin">
+          <ion-grid class="ion-margin-vertical">
             <ion-row>
               <ion-col>Band</ion-col>
               <ion-col>Rate</ion-col>
