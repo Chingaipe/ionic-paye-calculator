@@ -86,8 +86,10 @@ export class HomePage {
   }
 
   reset() {
+    // this.taxForm.reset();
     this.taxBandDues = [];
     this.taxInfo = []; // clear the array in case of recalculation
+    this.grossPay = 0;
     this.info = {
       napsa: 0,
       nhima: 0,
