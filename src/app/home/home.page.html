@@ -1,8 +1,12 @@
 <ion-header [translucent]="true">
-  <ion-toolbar color="light">
+  <ion-toolbar color="dark">
     <ion-buttons slot="primary">
-      <ion-button (click)="toggleTheme($event)">
-        <ion-icon slot="icon-only" ios="sunny" md="sunny"></ion-icon>
+      <ion-button (click)="toggleTheme()">
+        <ion-icon *ngIf="!isDark" slot="icon-only" name="contrast-outline"></ion-icon>
+        <ion-icon *ngIf="isDark" slot="icon-only" name="sunny"></ion-icon>
+      </ion-button>
+      <ion-button [routerLink]="['/about']">
+        <ion-icon slot="icon-only" name="information-circle"></ion-icon>
       </ion-button>
     </ion-buttons>
     <ion-title>
@@ -19,6 +23,7 @@
   </ion-header>
 
   <div class="ion-padding">
+    <!-- Form -->
     <form [formGroup]="taxForm" (ngSubmit)="onSubmit()">
       <ion-item>
         <ion-label position="floating">Basic Salary <ion-text color="danger">*</ion-text></ion-label>
@@ -33,26 +38,35 @@
         <ion-input outlined formControlName="otherDeducs" type="number"></ion-input>
       </ion-item>
       <ion-row class="ion-justify-content-center">
-        <ion-button class="ion-margin-vertical" color="secondary" fill="outline"
+        <ion-button class="ion-margin-vertical" color="primary"
           type="submit" [disabled]="taxForm.invalid"
         >
           Calculate
         </ion-button>
-        <!-- <ion-button class="ion-margin" color="danger" fill="outline"
-          type="button" (click)="reset()"
+        <ion-button class="ion-margin" color="danger" fill="outline"
+          type="button" (click)="clearContent()"
         >
           Clear
-        </ion-button> -->
+        </ion-button>
       </ion-row>
     </form>
 
+    <!-- Take home card -->
     <ion-card id="take-home" class="ion-margin-vertical">
       <ion-card-header>
-        <ion-card-subtitle>Take Home Amount</ion-card-subtitle>
-        <ion-card-title>{{ currency(info.takeHome) }}</ion-card-title>
+        <ion-card-subtitle>
+          <ion-row class="ion-align-items-center">
+            <ion-icon name="wallet-outline" size="large"></ion-icon>
+            <span class="ml-2">Take Home Amount</span>
+          </ion-row>
+        </ion-card-subtitle>
+        <ion-card-title>
+          {{ currency(info.takeHome) }}
+        </ion-card-title>
       </ion-card-header>
     </ion-card>
 
+    <!-- Info grid -->
     <ion-grid id="info-grid" class="ion-marign-vertical">
       <ion-row>
         <ion-col size="6">
@@ -83,7 +97,10 @@
           </ion-text>
         </ion-col>
         <ion-col size="6">
-          <ion-label class="info-label">Tax Deductions</ion-label>
+          <ion-label class="info-label">
+            <!-- <ion-icon src="/assets/icon/taxes.svg"></ion-icon> -->
+            Tax Deductions
+          </ion-label>
           <ion-text>
             <h4>{{ currency(info.taxDeduc) }}</h4>
           </ion-text>
@@ -106,6 +123,7 @@
       </ion-row>
     </ion-grid>
 
+    <!-- More details modal -->
     <ion-item lines="none">
       <ion-button (click)="isOpen = !isOpen" slot="end" color="secondary" fill="outline">More Details</ion-button>
     </ion-item>

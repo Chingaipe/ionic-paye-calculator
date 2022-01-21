@@ -1,3 +1,7 @@
+.ml-2 {
+  margin-left: 6px;
+}
+
 #take-home ion-card-title {
   font-size: 7vw;
   font-weight: 600;
@@ -20,10 +24,20 @@ form ion-label {
   color: var(--ion-color-secondary-shade);
 }
 
+form ion-item {
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --border-color: var(--ion-color-primary);
+}
+
 #info-grid ion-label {
-  font-size: 14px;
+  // font-size: 14px;
   color: var(--ion-color-secondary);
 }
+
+// #info-grid ion-icon {
+//   color: red;
+// }
 
 #info-grid h4 {
   margin-top: 10px;

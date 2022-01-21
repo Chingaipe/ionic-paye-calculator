@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>About</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">About</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <div class="ion-padding full-h">
+    <ion-thumbnail>
+      <ion-img src="/assets/shapes.svg"></ion-img>
+    </ion-thumbnail>
+    
+    <ion-text class="ion-text-center">
+      <p>
+        This application helps you compute Pay-As-You-Go (PAYE) Taxes based on the laws and regulations of Zambia.<br>
+        Computation is done based on the current (2022) PAYE tax bands.
+      </p>
+    </ion-text>
+  </div>
+</ion-content>
+
+<ion-footer class="ion-no-border ion-padding">
+  <ion-row class="ion-justify-content-center">
+    <ion-text color="secondary" class="ion-text-center">
+      &COPY; {{ year }} Chingaipe
+    </ion-text>
+  </ion-row>
+</ion-footer>

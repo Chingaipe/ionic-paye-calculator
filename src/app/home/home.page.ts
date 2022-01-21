@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Renderer2 } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 interface Info {
@@ -26,6 +26,7 @@ interface TaxInfo {
 export class HomePage {
 
   isOpen: false;
+  isDark = false;
   taxForm: FormGroup;
   info: Info = {
     napsa: 0,
@@ -48,6 +49,7 @@ export class HomePage {
 
   constructor(
     private fb: FormBuilder,
+    private render: Renderer2,
   ) {
     this.taxForm = this.fb.group({
       basic: '',
@@ -99,6 +101,11 @@ export class HomePage {
       taxDeduc: 0,
       takeHome: 0,
     };
+  }
+
+  clearContent(): void {
+    this.taxForm.reset();
+    this.reset();
   }
 
   /**
@@ -171,7 +178,6 @@ export class HomePage {
    * @returns NHIMA contribution amount
    */
   calculateNhima(salary: number): number {
-    console.log(salary);
     return salary * this.nhimaRate;
   }
 
@@ -220,12 +226,18 @@ export class HomePage {
     return new Intl.NumberFormat('en-GB', {
       style: 'currency',
       currency: 'ZMW',
-      currencyDisplay: 'narrowSymbol',
+      // currencyDisplay: 'narrowSymbol',
     }).format(value);
   }
 
-  toggleTheme(event) {
-    const systemDark = window.matchMedia('prefers-color-scheme: dark');
+  toggleTheme() {
+    this.isDark = !this.isDark;
+
+    if (this.isDark) {
+      this.render.setAttribute(document.body, 'color-theme', 'dark');
+    } else {
+      this.render.setAttribute(document.body, 'color-theme', 'light');
+    }
   }
 
 }
