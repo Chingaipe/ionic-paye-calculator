@@ -15,7 +15,7 @@ interface TaxInfo {
   band: string;
   percentage: string;
   amount: number;
-  dues: number;
+  dues: string;
 }
 
 @Component({
@@ -116,25 +116,25 @@ export class HomePage {
       band: '1',
       percentage: '0%',
       amount: this.info.exempt,
-      dues: 0
+      dues: '0.00'
     };
     const band1: TaxInfo = {
       band: '2',
       percentage: '25%',
       amount: this.taxBands[0],
-      dues: this.taxBandDues[0],
+      dues: (this.taxBandDues[0]).toFixed(2),
     };
     const band2: TaxInfo = {
       band: '3',
       percentage: '30%',
       amount: this.taxBands[1],
-      dues: this.taxBandDues[1],
+      dues: (this.taxBandDues[1]).toFixed(2),
     };
     const band3: TaxInfo = {
       band: '4',
       percentage: '37.5%',
       amount: 0,
-      dues: this.taxBandDues[2],
+      dues: (this.taxBandDues[2]).toFixed(2),
     };
     this.taxInfo.push(band0, band1, band2, band3);
   }

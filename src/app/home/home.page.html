@@ -1,5 +1,5 @@
 <ion-header [translucent]="true">
-  <ion-toolbar color="dark">
+  <ion-toolbar color="secondary">
     <ion-buttons slot="primary">
       <ion-button (click)="toggleTheme()">
         <ion-icon *ngIf="!isDark" slot="icon-only" name="contrast-outline"></ion-icon>
@@ -25,15 +25,15 @@
   <div class="ion-padding">
     <!-- Form -->
     <form [formGroup]="taxForm" (ngSubmit)="onSubmit()">
-      <ion-item>
+      <ion-item fill="outline" shape="round">
         <ion-label position="floating">Basic Salary <ion-text color="danger">*</ion-text></ion-label>
         <ion-input required formControlName="basic" type="number"></ion-input>
       </ion-item>
-      <ion-item>
+      <ion-item fill="outline" shape="round" class="my-8">
         <ion-label position="floating">Allowances</ion-label>
         <ion-input outlined formControlName="allowances" type="number"></ion-input>
       </ion-item>
-      <ion-item>
+      <ion-item fill="outline" shape="round">
         <ion-label position="floating">Statutory Deductions</ion-label>
         <ion-input outlined formControlName="otherDeducs" type="number"></ion-input>
       </ion-item>

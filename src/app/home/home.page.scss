@@ -25,9 +25,15 @@ form ion-label {
 }
 
 form ion-item {
-  --padding-start: 16px;
-  --padding-end: 16px;
+  --padding-start: 8px;
+  --padding-end: 8px;
+  --inner-padding-start: 8px;
+  --inner-padding-end: 8px;
   --border-color: var(--ion-color-primary);
+}
+
+.my-8 {
+  margin: 8px 0;
 }
 
 #info-grid ion-label {
