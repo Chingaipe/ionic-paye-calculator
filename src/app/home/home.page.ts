@@ -41,11 +41,11 @@ export class HomePage {
   taxBandDues: number[] = [];
   taxInfo: TaxInfo[] = [];
 
-  rates = [0.25, 0.3, 0.375];
-  taxBands = [300, 2100];
+  rates = [0.25, 0.3, 0.375]; // taxable band rates 25%, 30% & 37.5%
+  taxBands = [300, 2100]; // taxable incomes at bands 25% & 30% respectivily
   napsaRate = 0.05; // 5%
   nhimaRate = 0.01; // 1%
-  napsaCeiling = 1221.80;
+  napsaCeiling = 1221.80; // napsa contribution ceiling
 
   constructor(
     private fb: FormBuilder,
@@ -82,9 +82,6 @@ export class HomePage {
     }
 
     this.setTaxInfo();
-    /* console.log(JSON.stringify(this.info));
-    console.log(JSON.stringify(this.taxBandDues));
-    console.log(JSON.stringify(this.taxForm.value)); */
   }
 
   reset() {
@@ -118,25 +115,39 @@ export class HomePage {
       amount: this.info.exempt,
       dues: '0.00'
     };
-    const band1: TaxInfo = {
-      band: '2',
-      percentage: '25%',
-      amount: this.taxBands[0],
-      dues: (this.taxBandDues[0]).toFixed(2),
-    };
-    const band2: TaxInfo = {
-      band: '3',
-      percentage: '30%',
-      amount: this.taxBands[1],
-      dues: (this.taxBandDues[1]).toFixed(2),
-    };
-    const band3: TaxInfo = {
-      band: '4',
-      percentage: '37.5%',
-      amount: 0,
-      dues: (this.taxBandDues[2]).toFixed(2),
-    };
-    this.taxInfo.push(band0, band1, band2, band3);
+
+    if (this.isTaxable(this.grossPay)) {
+      const band1: TaxInfo = {
+        band: '2',
+        percentage: '25%',
+        amount: this.taxBands[0],
+        dues: (this.taxBandDues[0]).toFixed(2),
+      };
+      const band2: TaxInfo = {
+        band: '3',
+        percentage: '30%',
+        amount: this.taxBands[1],
+        dues: (this.taxBandDues[1]).toFixed(2),
+      };
+      const band3: TaxInfo = {
+        band: '4',
+        percentage: '37.5%',
+        amount: this.getBand3Amount(this.taxBandDues[2]),
+        dues: (this.taxBandDues[2]).toFixed(2),
+      };
+      this.taxInfo.push(band0, band1, band2, band3);
+    } else {
+      this.taxInfo.push(band0);
+    }
+  }
+
+  getBand3Amount(due: number): number {
+    if (due) {
+      const ans = due / this.rates[2]; // rate[2] being 0.375
+      return Number(ans.toFixed(2));
+    }
+
+    return 0;
   }
 
   /**
