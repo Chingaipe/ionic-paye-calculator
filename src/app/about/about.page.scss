@@ -17,3 +17,7 @@ div ion-text {
 div ion-thumbnail {
   --size: 72px;
 }
+
+ion-thumbnail ion-img {
+  object-fit: contain;
+}
