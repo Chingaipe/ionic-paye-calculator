@@ -1,5 +1,5 @@
 {
-  "name": "ionic-paye-calculator",
+  "name": "paye-calculator",
   "integrations": {
     "capacitor": {}
   },

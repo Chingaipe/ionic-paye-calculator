@@ -7,10 +7,13 @@ It shows you the applicable tax deduction and mandatory statutory deductions on 
     npm install
     ionic serve
 
+* You will need to have ionic cli installed
+
 
 ### Screenshots
 
-![Example Salary](Screenshot.png)
+![Example Salary](Screenshot1.png) | 
+![Tax band breakdown](screenshot2.png)
 
 
 #### For contributions

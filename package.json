@@ -1,8 +1,8 @@
 {
-  "name": "ionic-paye-calculator",
+  "name": "paye-calculator",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/",
+  "author": "Chingaipe",
+  "homepage": "https://github.com/Chingaipe/ionic-paye-calculator",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -63,5 +63,5 @@
     "ts-node": "~8.3.0",
     "typescript": "~4.4.4"
   },
-  "description": "An Ionic project"
+  "description": "A Zambian Pay-As-You-Earn Tax calculator built with Ionic Angular"
 }

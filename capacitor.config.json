@@ -1,5 +1,5 @@
 {
-	"appId": "io.ionic.starter",
+	"appId": "com.fourtierzm.payecalculator",
 	"appName": "paye-calculator",
 	"webDir": "www",
 	"bundledWebRuntime": false
