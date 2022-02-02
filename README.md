@@ -9,11 +9,13 @@ It shows you the applicable tax deduction and mandatory statutory deductions on 
 
 * You will need to have ionic cli installed
 
+### Links
+Coming soon to the Google Play store.
+
 
 ### Screenshots
 
-![Example Salary](Screenshot1.png) | 
-![Tax band breakdown](screenshot2.png)
+![Example Salary](Screenshot1.png) | ![Tax band breakdown](screenshot2.png)
 
 
 #### For contributions
