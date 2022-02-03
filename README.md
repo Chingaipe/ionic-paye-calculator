@@ -7,18 +7,33 @@ It shows you the applicable tax deduction and mandatory statutory deductions on 
     npm install
     ionic serve
 
-* You will need to have ionic cli installed
+* You will need to have [Ionic cli](https://ionicframework.com/docs/intro/cli) installed
 
 ### Links
 Coming soon to the Google Play store.
 
 
 ### Screenshots
+<div style="display:flex">
 
-![Example Salary](Screenshot1.png) | ![Tax band breakdown](screenshot2.png)
+<div style="margin-right:20px">
+
+![Example Salary](Screenshot1.png)
+
+</div>
+<div>
+
+![Tax band breakdown](screenshot2.png)
+
+</div>
+
+</div>
 
 
-#### For contributions
+### For contributions
 Get in touch or open an issue
 
-Made with :heart: in :zambia:
+### License
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+
+Made in :zambia:
