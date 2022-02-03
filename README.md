@@ -34,6 +34,6 @@ Coming soon to the Google Play store.
 Get in touch or open an issue
 
 ### License
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+The MIT License (MIT). Please see [License File](LICENSE) for more information.
 
 Made in :zambia:
